@@ -1,0 +1,58 @@
+<body>
+  <div id="logreg-forms">
+    <form class="form-signup">
+      <div class="social-login">
+        <button class="btn facebook-btn social-btn" type="button">
+          <span><i class="fab fa-facebook-f"></i> Sign up with Facebook</span>
+        </button>
+      </div>
+      <div class="social-login">
+        <button class="btn google-btn social-btn" type="button">
+          <span><i class="fab fa-google-plus-g"></i> Sign up with Google+</span>
+        </button>
+      </div>
+
+      <p style="text-align: center">OR</p>
+
+      <input
+        type="text"
+        id="user-name"
+        class="form-control"
+        placeholder="Username"
+        required=""
+        autofocus=""
+        [(ngModel)]="signupForm.name"
+        [ngModelOptions]="{standalone: true}"
+      />
+      <input
+        type="email"
+        id="user-email"
+        class="form-control"
+        placeholder="Email address"
+        required
+        autofocus=""
+        [(ngModel)]="signupForm.email"
+        [ngModelOptions]="{standalone: true}"
+      />
+      <input
+        type="password"
+        id="user-pass"
+        class="form-control"
+        placeholder="Password"
+        required
+        autofocus=""
+        [(ngModel)]="signupForm.passWord"
+        [ngModelOptions]="{standalone: true}"
+      />
+
+      <div class="input-group">
+        <button class="btn btn-md btn-block submit" type="submit" (click)="saveUser()">
+          <i class="fas fa-user-plus"></i> Sign Up
+        </button>
+      </div>
+
+      <a (click)="goBackLogin()"><i class="fa fa-angle-left"></i> Login</a>
+    </form>
+    <br />
+  </div>
+</body>
