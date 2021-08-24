@@ -15,6 +15,7 @@ export class NotepageComponent implements OnInit {
     title: null,
     detail: null,
   };
+  viewNotes:any = {}
   constructor(private activeroute: ActivatedRoute,private route: Router) {}
 
   ngOnInit(): void {
@@ -31,12 +32,12 @@ export class NotepageComponent implements OnInit {
   }
 
   addNotes() {
-    const modal = document.getElementById('myModal');
+    const modal = document.getElementById('addNote');
     if (modal) modal.style.display = 'block';
   }
 
   closeModal() {
-    const modal = document.getElementById('myModal');
+    const modal = document.getElementById('addNote');
     if (modal) modal.style.display = 'none';
     this.resetFields();
   }
@@ -49,16 +50,24 @@ export class NotepageComponent implements OnInit {
     this.updateAt = -1;
   }
 
-  removeNote(i: any) {
+  removeNote(i: any,event:any) {
+    event.stopPropagation();
     this.currentUser[0]['notes'].splice(i, 1);
     console.log(this.currentUser);
     this.updateListing();
   }
 
-  editNote(i: any) {
+  editNote(i: any,event:any) {
+    event.stopPropagation();
     this.updateAt = i;
     this.notes = JSON.parse(JSON.stringify(this.currentUser[0]['notes'][i]));
     this.addNotes();
+  }
+
+  viewNote(i:any){
+    this.viewNotes = this.currentUser[0]['notes'][i];
+    const modal = document.getElementById('noteView');
+    if (modal) modal.style.display = 'block';
   }
 
   updateNote(){
@@ -93,5 +102,11 @@ export class NotepageComponent implements OnInit {
 
   resetState(){
     if(confirm('Are you sure you want to logout')) this.route.navigateByUrl('login');
+  }
+
+  closeViewModal(){
+    const modal = document.getElementById('noteView');
+    if (modal) modal.style.display = 'none';
+    this.viewNotes = {};
   }
 }

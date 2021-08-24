@@ -14,18 +14,19 @@
       <div
         class="col-2 carddesign1"
         *ngFor="let card of currentUser[0]['notes'];let i = index"
+        (click)="viewNote(i)"
       >
-      <h5>{{card.title}}</h5>
-      <span>{{card.detail}}</span>
-      <i class="positionDelet" (click)="removeNote(i)"><img src="../../assets/trash.svg"></i>
-      <i class="positionEdit" (click)="editNote(i)"><img src="../../assets/pencil-square.svg"></i>
+      <div class="row m-0 overflowBind"><h5>{{card.title}}</h5></div>
+      <div class="row m-0 overflowBind"><span>{{card.detail}}</span></div>
+      <i class="positionDelet" (click)="removeNote(i,$event)"><img src="../../assets/trash.svg"></i>
+      <i class="positionEdit" (click)="editNote(i,$event)"><img src="../../assets/pencil-square.svg"></i>
       </div>
       <div class="col-2 carddesign" (click)="addNotes()">Click to Add</div>
     </div>
   </div>
 </body>
 
-<div class="modal" id="myModal" #myModal>
+<div class="modal" id="addNote" #addNote>
   <div class="modal-dialog">
     <div class="modal-content">
       <!-- Modal Header -->
@@ -87,3 +88,30 @@
     </div>
   </div>
 </div>
+
+
+<div class="modal" id="noteView" #noteView>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">{{viewNotes.title}}</h4>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            (click)="closeViewModal()"
+          >
+            &times;
+          </button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-12 contentContainer"><span>{{viewNotes.detail}}</span></div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
